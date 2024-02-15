@@ -1,0 +1,24 @@
+<div class="container__tasks">
+  <div class="container__form">
+    <form (ngSubmit)="addTask()">
+      <label for="task">New Task</label>
+      <input type="text" name="task" id="task" placeholder="Think and write a new task..." [(ngModel)]="newTaskContent" />
+      <button type="submit">Add task</button>
+    </form>
+  </div>
+  <div class="container__task-list">
+    <h3 *ngIf="tasks.size; else emptyTasks">Your tasks (click to delete):</h3>
+    <ng-template #emptyTasks>
+      <h3>Empty task list...</h3>
+    </ng-template>
+    <ul>
+      <li
+        class="container__task-list-item"
+        *ngFor="let taskKey of tasks.keys()"
+        (click)="deleteTask(taskKey)"
+      >
+        {{tasks.get(taskKey)?.content}}
+      </li>
+    </ul>
+  </div>
+</div>
